@@ -9,8 +9,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
 
-    "prettier.singleQuote": false,
-    "prettier.enable": true,
-    "editor.formatOnSave": true,
-    "editor.formatOnSaveMode": "file",
+  "prettier.singleQuote": false,
+  "prettier.enable": true,
+  "prettier.semi": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file"
 }
