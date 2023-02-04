@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: package.json
+appId: com.codechovui.app
+productName: Green Screen Pomodoro
 directories:
   buildResources: build
 files:
@@ -11,9 +11,9 @@ asarUnpack:
   - resources/*
 afterSign: build/notarize.js
 win:
-  executableName: package.json
+  executableName: Green Screen Pomodoro
 nsis:
-  artifactName: ${name}-${version}-setup.${ext}
+  artifactName: Setup Green Screen Pomodoro v.${version}.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
@@ -25,16 +25,16 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
 dmg:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: Green Screen Pomodoro v.${version}.${ext}
 linux:
   target:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: contact@codechovui.dev
   category: Utility
 appImage:
-  artifactName: ${name}-${version}.${ext}
+  artifactName: Green Screen Pomodoro v.${version}.${ext}
 npmRebuild: false
 publish:
   provider: generic

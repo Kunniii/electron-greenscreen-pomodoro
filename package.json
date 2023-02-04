@@ -1,21 +1,20 @@
 {
-  "name": "package.json",
+  "name": "green-screen-pomodoro",
   "version": "1.0.0",
-  "description": "An Electron application with React",
+  "description": "A Pomodoro app, built for OBS streaming",
   "main": "./out/main/index.js",
-  "author": "github.com/Kunniii",
+  "author": "CodeChoVui",
   "license": "MIT",
-  "homepage": "",
+  "homepage": "https://CodeChoVui.dev",
   "scripts": {
-    "format": "prettier --write .",
     "lint": "eslint . --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix",
     "start": "electron-vite preview",
     "dev": "electron-vite dev",
     "build": "electron-vite build",
     "postinstall": "electron-builder install-app-deps",
-    "build:win": "npm run build && electron-builder --win --config",
-    "build:mac": "npm run build && electron-builder --mac --config",
-    "build:linux": "npm run build && electron-builder --linux --config"
+    "build:win": "yarn build && electron-builder --win --config",
+    "build:mac": "yarn build && electron-builder --mac --config",
+    "build:linux": "yarn build && electron-builder --linux --config"
   },
   "dependencies": {
     "@electron-toolkit/preload": "^1.0.3",
@@ -23,7 +22,9 @@
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
+    "@tailwindcss/jit": "^0.1.18",
     "@vitejs/plugin-react": "^3.0.1",
+    "autoprefixer": "^10.4.13",
     "electron": "^21.3.3",
     "electron-builder": "^23.6.0",
     "electron-vite": "^1.0.17",
@@ -31,6 +32,7 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.11",
+    "postcss": "^8.4.21",
     "prettier": "^2.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
