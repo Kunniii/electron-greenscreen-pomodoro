@@ -36,6 +36,8 @@ jobs:
   linux-build:
     name: Build on Linux
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Repo checkout
         uses: actions/checkout@v3
@@ -61,8 +63,6 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
-        permissions:
-          contents: write
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
