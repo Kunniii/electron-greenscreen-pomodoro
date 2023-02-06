@@ -1,6 +1,6 @@
 {
   "name": "green-screen-pomodoro",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "A Pomodoro app, built for OBS streaming",
   "main": "./out/main/index.js",
   "author": "CodeChoVui",

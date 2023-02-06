@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Linux executables
+      - name: Build executable
         run: yarn build:win
 
   linux-build:
@@ -48,13 +48,43 @@ jobs:
           path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.os }}-yarn-key
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Windows executables
+      - name: Build executable
         run: yarn build:linux
+
+  macos-build:
+    name: Build on MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "YARN_CACHE_DIR=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
+
+      - name: Cache dependencies
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-key
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build executable
+        run: yarn build:mac
 
   # release:
   #   name: Create Release
