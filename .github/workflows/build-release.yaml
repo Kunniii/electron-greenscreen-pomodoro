@@ -10,7 +10,6 @@ on:
 jobs:
   windows-build:
     name: Build on Windows
-    id: windows_build
     runs-on: windows-latest
     steps:
       - name: Repo checkout
@@ -30,7 +29,6 @@ jobs:
 
   linux-build:
     name: Build on Linux
-    id: linux_build
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
@@ -50,7 +48,6 @@ jobs:
 
   macos-build:
     name: Build on MacOS
-    id: macos_build
     runs-on: macos-latest
     steps:
       - name: Repo checkout
