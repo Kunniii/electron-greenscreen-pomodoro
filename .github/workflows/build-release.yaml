@@ -27,11 +27,11 @@ jobs:
       - name: Build executable
         run: yarn build:win
 
-      - name: Publish executable
+      - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
           name: Windows Setup
-          path: dist/Setup_Green_Screen_Pomodoro_v*.exe
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.exe
 
   linux-build:
     name: Build on Linux
@@ -52,11 +52,11 @@ jobs:
       - name: Build executable
         run: yarn build:linux
 
-      - name: Publish executable
+      - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
           name: MacOS Setup
-          path: dist/Setup_Green_Screen_Pomodoro_v*.*
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.*
 
   macos-build:
     name: Build on MacOS
@@ -77,11 +77,11 @@ jobs:
       - name: Build executable
         run: yarn build:mac
 
-      - name: Publish executable
+      - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
           name: MacOS Setup
-          path: dist/Setup_Green_Screen_Pomodoro_v*.dmg
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.dmg
 
   # release:
   #   name: Create Release
