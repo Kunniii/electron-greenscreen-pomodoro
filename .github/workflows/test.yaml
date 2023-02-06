@@ -74,9 +74,11 @@ jobs:
           name: Release ${{ github.ref_name }}-${{ github.run_number }}
           generate_release_notes: true
 
+      - name: ls -R
+        run: ls -R
+
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
-        run: ls -R
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
