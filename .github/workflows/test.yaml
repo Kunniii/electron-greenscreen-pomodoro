@@ -31,8 +31,8 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: Windows Setup
-          path: ./dist/Setup_Green_Screen_Pomodoro_v*.exe
+          name: Windows Setup.zip
+          path: ./dist/*.exe
 
   linux-build:
     name: Build on Linux
@@ -56,13 +56,13 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: Linux_GreenScreenPomodoro.deb
+          name: Linux Setup.zip
           path: ./dist/*.deb
 
       - name: Download executable
         uses: actions/download-artifact@v3
         with:
-          name: Linux_GreenScreenPomodoro.deb
+          name: Linux Setup.zip
 
       - name: Create Release
         id: create_release
@@ -80,9 +80,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Linux_GreenScreenPomodoro.deb
-          asset_name: Linux Green Screen Pomodoro ${{ github.ref_name }}.deb
-          asset_content_type: application/octet-stream
+          asset_path: Linux Setup.zip
+          asset_name: Linux Setup ${{ github.ref_name }}.zip
+          asset_content_type: application/zip
 
   macos-build:
     name: Build on MacOS
@@ -106,5 +106,5 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: MacOS Setup
-          path: ./dist/Setup_Green_Screen_Pomodoro_v*.dmg
+          name: MacOS Setup.zip
+          path: ./dist/*.dmg
