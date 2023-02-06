@@ -9,7 +9,7 @@ on:
 
 jobs:
   windows-build:
-    name: Build app
+    name: Build on Windows
     runs-on: windows-latest
     steps:
       - name: Repo checkout
@@ -20,26 +20,14 @@ jobs:
         with:
           node-version: "18"
 
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "YARN_CACHE_DIR=$(yarn cache dir)" >> "${GITHUB_OUTPUT}"
-
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.yarn-cache.outputs.YARN_CACHE_DIR }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Build Windows executables
+      - name: Build Linux executables
         run: yarn build:win
 
   linux-build:
-    name: Build app
+    name: Build on Linux
     runs-on: ubuntu-latest
     steps:
       - name: Repo checkout
