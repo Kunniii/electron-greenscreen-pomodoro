@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "@electron/notarize": "^1.2.3",
-    "@tailwindcss/jit": "^0.1.18",
     "@vitejs/plugin-react": "^3.0.1",
     "autoprefixer": "^10.4.13",
     "electron": "^21.3.3",
