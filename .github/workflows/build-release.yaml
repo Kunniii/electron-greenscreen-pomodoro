@@ -1,4 +1,4 @@
-name: Build Electron App and Release
+name: CI/CD
 
 on:
   push:
@@ -33,71 +33,52 @@ jobs:
           name: Windows Setup
           path: ./dist/Setup_Green_Screen_Pomodoro_v*.exe
 
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  linux-build:
+    name: Build on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
+          node-version: "18"
+          cache: "yarn"
 
-      - name: Upload Release Assets
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build executable
+        run: yarn build:linux
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./Windows Setup.zip
-          asset_name: Windows Setup.zip
-          asset_content_type: application/zip
+          name: Linux Setup
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.*
 
-  # linux-build:
-  #   name: Build on Linux
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Repo checkout
-  #       uses: actions/checkout@v3
+  macos-build:
+    name: Build on MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
 
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "18"
-  #         cache: "yarn"
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
 
-  #     - name: Install dependencies
-  #       run: yarn install --frozen-lockfile
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
 
-  #     - name: Build executable
-  #       run: yarn build:linux
+      - name: Build executable
+        run: yarn build:mac
 
-  #     - name: Upload executable
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: Linux Setup
-  #         path: ./dist/Setup_Green_Screen_Pomodoro_v*.*
-
-  # macos-build:
-  #   name: Build on MacOS
-  #   runs-on: macos-latest
-  #   steps:
-  #     - name: Repo checkout
-  #       uses: actions/checkout@v3
-
-  #     - name: Setup Node
-  #       uses: actions/setup-node@v3
-  #       with:
-  #         node-version: "18"
-  #         cache: "yarn"
-
-  #     - name: Install dependencies
-  #       run: yarn install --frozen-lockfile
-
-  #     - name: Build executable
-  #       run: yarn build:mac
-
-  #     - name: Upload executable
-  #       uses: actions/upload-artifact@v3
-  #       with:
-  #         name: MacOS Setup
-  #         path: ./dist/Setup_Green_Screen_Pomodoro_v*.dmg
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacOS Setup
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.dmg
