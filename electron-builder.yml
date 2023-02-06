@@ -28,8 +28,6 @@ dmg:
   artifactName: Setup_Green_Screen_Pomodoro_v.${version}.${ext}
 linux:
   target:
-    - AppImage
-    - snap
     - deb
   maintainer: contact@codechovui.dev
   category: Utility
