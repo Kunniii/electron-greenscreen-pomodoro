@@ -56,8 +56,13 @@ jobs:
       - name: Upload executable
         uses: actions/upload-artifact@v3
         with:
-          name: Linux_Setup
+          name: Linux_GreenScreenPomodoro.deb
           path: ./dist/*.deb
+
+      - name: Download executable
+        uses: actions/download-artifact@v3
+        with:
+          name: Linux_GreenScreenPomodoro.deb
 
       - name: Create Release
         id: create_release
@@ -75,8 +80,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/*.deb
-          asset_name: Green Screen Pomodoro ${{ github.ref_name }}.deb
+          asset_path: ./Linux_GreenScreenPomodoro.deb
+          asset_name: Linux Green Screen Pomodoro ${{ github.ref_name }}.deb
           asset_content_type: application/octet-stream
 
   macos-build:
