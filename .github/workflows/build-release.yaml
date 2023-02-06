@@ -21,11 +21,17 @@ jobs:
           node-version: "18"
           cache: "yarn"
 
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
+      # - name: Install dependencies
+      #   run: yarn install --frozen-lockfile
 
       - name: Build executable
         run: yarn build:win
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows Setup
+          path: ./dist/Setup_Green_Screen_Pomodoro_v*.exe
 
       - name: Create Release
         id: create_release
@@ -33,8 +39,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
+          tag_name: ${{ github.run_number }}
+          release_name: Release ${{ github.run_number }}
 
       - name: Upload Release Assets
         uses: actions/upload-release-asset@v1
@@ -42,8 +48,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./dist/Setup_Green_Screen_Pomodoro_v*.exe
-          asset_name: Setup_Green_Screen_Pomodoro.exe
+          asset_path: ./Windows Setup.zip
+          asset_name: Windows Setup.zip
+          asset_content_type: application/zip
 
   # linux-build:
   #   name: Build on Linux
