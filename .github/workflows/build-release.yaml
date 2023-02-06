@@ -5,7 +5,7 @@ on:
     branches:
       - "main"
     tags:
-      - "v.*"
+      - "v.*.*.*"
 
 jobs:
   windows-build:
@@ -61,6 +61,8 @@ jobs:
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
+        permissions:
+          contents: write
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
