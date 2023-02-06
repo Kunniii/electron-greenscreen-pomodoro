@@ -13,7 +13,7 @@ afterSign: build/notarize.js
 win:
   executableName: Green Screen Pomodoro
 nsis:
-  artifactName: Setup Green Screen Pomodoro v.${version}.${ext}
+  artifactName: Setup_Green_Screen_Pomodoro_v.${version}.${ext}
   shortcutName: ${productName}
   uninstallDisplayName: ${productName}
   createDesktopShortcut: always
@@ -25,7 +25,7 @@ mac:
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
 dmg:
-  artifactName: Green Screen Pomodoro v.${version}.${ext}
+  artifactName: Setup_Green_Screen_Pomodoro_v.${version}.${ext}
 linux:
   target:
     - AppImage
@@ -34,7 +34,7 @@ linux:
   maintainer: contact@codechovui.dev
   category: Utility
 appImage:
-  artifactName: Green Screen Pomodoro v.${version}.${ext}
+  artifactName: Setup_Green_Screen_Pomodoro_v.${version}.${ext}
 npmRebuild: false
 publish:
   provider: generic
