@@ -1,0 +1,90 @@
+name: Build Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  windows-build:
+    name: Build on Windows
+    runs-on: windows-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build executable
+        run: yarn build:win
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows Setup
+          path: ./dist/Green_Screen_Pomodoro.exe
+
+  linux-build:
+    name: Build on Linux
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build executable
+        run: yarn build:linux
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: Linux Setup
+          path: ./dist/Green_Screen_Pomodoro.deb
+
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "EDN_Auto_V2.zip,checksum.md5"
+          body: "# New Release :tada: :tada:"
+
+  macos-build:
+    name: Build on MacOS
+    runs-on: macos-latest
+    steps:
+      - name: Repo checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Build executable
+        run: yarn build:mac
+
+      - name: Upload executable
+        uses: actions/upload-artifact@v3
+        with:
+          name: MacOS Setup
+          path: ./dist/Green_Screen_Pomodoro.dmg
